@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"time"
 )
 
 var ycDefId = map[string]string{
@@ -25,8 +26,37 @@ var ycDefId = map[string]string{
 	"CC":   "8a8b2ca0447ffc96014491641747535e",
 }
 
-// 中债企业债收益率
 func YcDetail(year int, ratingCd string, date string) (float64, error) {
+
+	start, err := time.ParseInLocation("2006-01-02", date, time.Local)
+	if err != nil {
+		return 0, err
+	}
+	if start.After(time.Now()) {
+		start = time.Now()
+	}
+	for i := 0; i < 7; i++ {
+		res, err := ycDetail(year, ratingCd, start.Format("2006-01-02"))
+		if err != nil {
+			return 0, err
+		}
+		if res != 0 {
+			return res, nil
+		}
+		start = SubDay(start, 1)
+	}
+	return 0, err
+}
+
+// 中债企业债收益率
+func ycDetail(year int, ratingCd string, date string) (float64, error) {
+	t, err := time.ParseInLocation("2006-01-02", date, time.Local)
+	if err != nil {
+		return 0, err
+	}
+	if t.After(time.Now()) {
+		date = time.Now().Format("2006-01-02")
+	}
 	id, ok := ycDefId[ratingCd]
 	if !ok {
 		return 0, errors.New("id not exist")
@@ -62,4 +92,9 @@ func YcDetail(year int, ratingCd string, date string) (float64, error) {
 
 	}
 	return 0, nil
+}
+
+func SubDay(t time.Time, day int) time.Time {
+	d, _ := time.ParseDuration(fmt.Sprintf("-%dh", 24*day))
+	return t.Add(d)
 }
