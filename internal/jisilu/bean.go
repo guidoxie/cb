@@ -61,6 +61,7 @@ type Detail struct {
 }
 
 type CBAdvice struct {
+	Market       string  `json:"market" table:"市场"`
 	BondID       string  `json:"bond_id" table:"代码"`
 	BondNm       string  `json:"bond_nm" table:"名称"`
 	RatingCd     string  `json:"rating_cd" table:"评级"`

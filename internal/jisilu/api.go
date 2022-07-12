@@ -215,14 +215,15 @@ func (j *jiSiLu) PreCBList(date ...string) ([]CBAdvice, error) {
 				return nil, err
 			}
 			sub := CBAdvice{
+				Market:       GetMarket(cb.BondID),
 				BondID:       cb.BondID,
 				BondNm:       cb.BondNm,
 				RatingCd:     cb.RatingCd,
 				CurrIssAmt:   cb.CurrIssAmt,
 				ConvertValue: cb.ConvertValue,
 				PremiumRt:    cb.PremiumRt,
-				ListDt:       p.ListDt,
-				ApplyDate:    p.ApplyDate,
+				ListDt:       ParseDate(p.ListDt),
+				ApplyDate:    ParseDate(p.ApplyDate),
 			}
 			// ExpiryValue 到期价值=票面利率+赎回价
 			var year int

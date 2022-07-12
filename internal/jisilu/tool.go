@@ -2,9 +2,11 @@ package jisilu
 
 import (
 	"encoding/json"
+	"fmt"
 	"math"
 	"regexp"
 	"strings"
+	"time"
 )
 
 func MarshalAndUnmarshal(dst interface{}, src interface{}) error {
@@ -29,4 +31,21 @@ func FindFirstSubMatch(expr, str string) string {
 func Round(f float64, n int) float64 {
 	n10 := math.Pow10(n)
 	return math.Trunc((f+0.5/n10)*n10) / n10
+}
+
+func ParseDate(date string) string {
+	if len(date) == 0 {
+		return ""
+	}
+	t, _ := time.Parse("2006-01-02", date)
+	return fmt.Sprintf("%d月%d日", t.Month(), t.Day())
+}
+
+func GetMarket(bondID string) string {
+	if strings.HasPrefix(bondID, "11") {
+		return "沪"
+	} else if strings.HasPrefix(bondID, "12") {
+		return "深"
+	}
+	return ""
 }

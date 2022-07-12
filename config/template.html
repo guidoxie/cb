@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>可转债上市预测/申购建议</title>
+    <style type="text/css">
+        body {
+            background: #f0f0f0;
+            font-family:  -apple-system,BlinkMacSystemFont,Helvetica Neue,PingFang SC,Microsoft YaHei,Source Han Sans SC,Noto Sans CJK SC,WenQuanYi Micro Hei,sans-serif
+        }
+        .card-detail {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .card-header {
+            font-size: 1.8rem;
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+        .left-header{
+            display: flex;
+            padding: 0.5rem 1rem;
+            font-size: 2rem;
+            /* border-bottom: 1px solid #ccc; */
+            /* margin-bottom: 0.5rem; */
+        }
+        .place{
+            display: inline-block;
+            background-color: #e7d8ff;
+            padding: 0 16px;
+            line-height: 70px;
+            border-radius: 10px;
+            color: #7a43cf;
+            font-size: 3rem;
+        }
+
+        .sz{
+            background-color: #abd5ff;
+            color: #004e89;
+        }
+
+        .sh{
+            background-color: #e7d8ff ;
+        }
+        .title{
+            display: flex;
+            margin-left: 10px;
+            flex-direction: column;
+        }
+
+        .title-name{
+
+        }
+        .title-number{
+            font-size: 1.6rem;
+            color: #585858;
+        }
+        .detail-item {
+            padding: 6px 1rem;
+            display: flex;
+            font-size: 2rem;
+            width: 40%;
+            justify-content: space-between;
+        }
+
+        span.detail-item-title {
+            color: #585858;
+        }
+
+        span.detail-item-content {
+            color: #383838;
+        }
+
+
+        .card {
+            margin: 20px;
+            background: white;
+            border-radius: 16px;
+            padding: 1rem;
+
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        {{ if .apply }}
+        <h1>待申购</h1>
+            {{ range $key,$value := .apply }}
+                <div class="card">
+                    <div class="header">
+                        <div class="card-second-header">
+                            <div class="left-header">
+                                <span class="place">{{ $value.Market }}</span>
+                                <div class="title">
+                                    <span class="title-name">{{ $value.BondNm }}</span>
+                                    <span class="title-number">{{ $value.BondID }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <div>
+                                <span>{{ $value.ApplyDate }}</span>
+                                <span>明日</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-item">
+                            <span class="detail-item-title">发行规模</span><span class="detail-item-content">{{ $value.CurrIssAmt }}亿</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">债券评级</span><span class="detail-item-content">{{ $value.RatingCd }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">转股价值</span><span class="detail-item-content">{{ $value.ConvertValue }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">到期价值</span><span class="detail-item-content">{{ $value.ExpiryValue }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">纯债现值</span><span class="detail-item-content">{{ $value.DebtValue }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">转股溢价率</span><span class="detail-item-content">{{ $value.PremiumRt }}%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">申购建议</span><span class="detail-item-content">{{ $value.ApplyAdvice }}</span>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+        {{ end }}
+        {{ if .list }}
+        <h1>待上市</h1>
+            {{ range $key,$value := .list }}
+                <div class="card">
+                    <div class="header">
+                        <div class="card-second-header">
+                            <div class="left-header">
+                                <span class="place">{{ $value.Market }}</span>
+                                <div class="title">
+                                    <span class="title-name">{{ $value.BondNm }}</span>
+                                    <span class="title-number">{{ $value.BondID }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-header">
+                            <div>
+                                <span>{{ $value.ListDt }}</span>
+                                <span>明日</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-detail">
+                        <div class="detail-item">
+                            <span class="detail-item-title">发行规模</span><span class="detail-item-content">{{ $value.CurrIssAmt }}亿</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">债券评级</span><span class="detail-item-content">{{ $value.RatingCd }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">转股价值</span><span class="detail-item-content">{{ $value.ConvertValue }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">到期价值</span><span class="detail-item-content">{{ $value.ExpiryValue }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">纯债现值</span><span class="detail-item-content">{{ $value.DebtValue }}</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">转股溢价率</span><span class="detail-item-content">{{ $value.PremiumRt }}%</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-item-title">上市预测</span><span class="detail-item-content">{{ $value.ListForecast }}</span>
+                        </div>
+                    </div>
+                </div>
+            {{ end }}
+        {{ end }}
+    </div>
+</body>
+</html>
