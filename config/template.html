@@ -16,7 +16,7 @@
         }
 
         .card-header {
-            font-size: 1.8rem;
+            font-size: 2.5rem;
             margin-right: 1rem;
             margin-bottom: 1rem;
         }
@@ -30,7 +30,7 @@
         .place{
             display: inline-block;
             background-color: #e7d8ff;
-            padding: 0 16px;
+            padding: 10px 16px;
             line-height: 70px;
             border-radius: 10px;
             color: #7a43cf;
@@ -52,16 +52,16 @@
         }
 
         .title-name{
-
+            font-size: 2.5rem;
         }
         .title-number{
-            font-size: 1.6rem;
+            font-size: 2rem;
             color: #585858;
         }
         .detail-item {
-            padding: 6px 1rem;
+            padding: 20px 1rem;
             display: flex;
-            font-size: 2rem;
+            font-size: 2.5rem;
             width: 40%;
             justify-content: space-between;
         }
@@ -87,6 +87,17 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #ccc;
+        }
+        h1 {
+            font-size: 4rem;
+            padding-left: 16px;
+        }
+        .note {
+            font-size: 1rem;
+            margin: 20px;
+            color: #585858;
+            padding: 1rem 1rem 1rem 1rem;
+            position:absolute;
         }
     </style>
 </head>
@@ -187,6 +198,16 @@
                 </div>
             {{ end }}
         {{ end }}
+    </div>
+    <div class="note">
+        <span>
+            <p>a. 转股价值 = 正股价格/转股价*100</p>
+            <p>b. 到期价值 = 票面利率+赎回价</p>
+            <p>c. 纯债现值 =  到期赎回价/(1+中债企业债收益率)^到期年限</p>
+            <p>d. 上市预测 = 转股价值*(1+参考同行业转债溢价率)</p>
+            <p>e. 转股溢价率 = 转债价格/转股价值-100%</p>
+            <p>f. 申购建议参考指标，每满足一个条件给予一星，①评级不低于A- ②转股价值是否高于100 ③转股溢价率是否为负 ④纯债现值是否高于90</p>
+        </span>
     </div>
 </body>
 </html>
